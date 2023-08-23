@@ -155,7 +155,16 @@ class LVCBlock(torch.nn.Module):
         _, in_channels, _ = x.shape         # (B, c_g, L')
         
         x = self.convt_pre(x)               # (B, c_g, stride * L')
+
+        # print(f"LVCBlock convt_pre: {x}")
+        # print(f"LVCBlock convt_pre shape: {x.shape}")
+
         kernels, bias = self.kernel_predictor(c)
+
+        # print(f"LVC Kernel: {kernels}")
+        # print(f"LVC Kernel shape: {kernels.shape}")
+        # print(f"LVC Bias: {bias}")
+        # print(f"LVC Bias shape: {bias.shape}")
 
         for i, conv in enumerate(self.conv_blocks):
             output = conv(x)                # (B, c_g, stride * L')

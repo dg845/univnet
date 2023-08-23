@@ -50,11 +50,24 @@ class Generator(nn.Module):
         '''
         z = self.conv_pre(z)                # (B, c_g, L)
 
+        # print(f"Hidden states after conv_pre: {z}")
+        # print(f"Hidden states after conv_pre shape: {z.shape}")
+
+        i = 0
         for res_block in self.res_stack:
             res_block.to(z.device)
             z = res_block(z, c)             # (B, c_g, L * s_0 * ... * s_i)
+            # print(f"Hidden states after LVC block {i}: {z}")
+            # print(f"Hidden states after LVC block {i} shape: {z.shape}")
+            i += 1
+        
+        # print(f"Hidden states after LVC blocks: {z}")
+        # print(f"Hidden states after LVC blocks shape: {z.shape}")
 
         z = self.conv_post(z)               # (B, 1, L * 256)
+
+        # print(f"Final hidden states: {z}")
+        # print(f"Final hidden states shape: {z.shape}")
 
         return z
 
