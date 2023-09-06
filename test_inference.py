@@ -87,6 +87,10 @@ def main(args):
         audio = audio.cpu().detach()
         # print(f"Audio shape: {audio.shape}")
 
+        # Get mean and stddev of output audio.
+        print(f"Mean of audio: {torch.mean(audio)}")
+        print(f"Std Dev of audio: {torch.std(audio)}")
+
         # Get test expected slice
         expected_slice = audio[-1, -1, -9:].squeeze(0)
         print(f"Expected slice: {expected_slice}")

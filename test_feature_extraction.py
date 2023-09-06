@@ -54,6 +54,10 @@ def main(args):
     mel_spectrogram = mel_spectrogram.detach().cpu()
     # print(f"MEL spectrogram: {mel_spectrogram}")
     # print(f"MEL spectrogram shape: {mel_spectrogram.shape}")
+
+    # Get mean and stddev of mel_spectrogram.
+    print(f"Mean of MEL spectrogram: {torch.mean(mel_spectrogram)}")
+    print(f"Std Dev of MEL spectrogram: {torch.std(mel_spectrogram)}")
     
     # Get MEL spectrogram expected slice
     expected_slice = mel_spectrogram[0, 0, :30]
